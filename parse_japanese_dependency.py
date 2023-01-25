@@ -42,7 +42,6 @@ if __name__ == "__main__":
     output_s = "{"
     is_head = True
     for k,v in input_data.items():
-        print(k)
         d = parse_document(v, nlp)
         if is_head:
             output_s = output_s + "\n"
