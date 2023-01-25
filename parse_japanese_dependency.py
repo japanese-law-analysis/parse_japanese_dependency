@@ -28,16 +28,20 @@ def parse_document(sentence, nlp):
 parser = argparse.ArgumentParser(prog = "parse japanese dependency", description = "係り受け解析")
 parser.add_argument("-i", "--input")
 parser.add_argument("-o", "--output")
+parser.add_argument("-j", "--json")
 
 
 if __name__ == "__main__":
     args = parser.parse_args()
     input_file_name = args.input
     output_file_name = args.output
-    input_f = open(input_file_name, "r", encoding="UTF-8")
-    input_s = input_f.read()
-    input_f.close()
-    input_data = json.loads(input_s)
+    if input_file_name == None:
+        input_data = json.loads(args.json)
+    else:
+        input_f = open(input_file_name, "r", encoding="UTF-8")
+        input_s = input_f.read()
+        input_f.close()
+        input_data = json.loads(input_s)
     nlp = spacy.load('ja_ginza')
     output_s = "{"
     is_head = True
@@ -51,8 +55,11 @@ if __name__ == "__main__":
         s = json.dumps(d, ensure_ascii=False)
         output_s = output_s + f"\"{k}\":{s}"
     output_s = output_s + "\n}"
-    output_f = open(output_file_name, "w", encoding="UTF-8")
-    output_f.write(output_s)
-    output_f.close()
+    if output_file_name == None:
+        print(output_s)
+    else:
+        output_f = open(output_file_name, "w", encoding="UTF-8")
+        output_f.write(output_s)
+        output_f.close()
 
 
