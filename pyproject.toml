@@ -1,0 +1,5 @@
+[project]
+name = "parse_japanese_dependency"
+version = "0.1.0"
+dependencies = ["spacy", "ginza", "ja_ginza"]
+
