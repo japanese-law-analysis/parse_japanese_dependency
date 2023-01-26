@@ -29,6 +29,8 @@ parser = argparse.ArgumentParser(prog = "parse japanese dependency", description
 parser.add_argument("-i", "--input")
 parser.add_argument("-o", "--output")
 parser.add_argument("-j", "--json")
+parser.add_argument("-e", "--electra", action="store_true")
+parser.add_argument("-n", "--normal", action="store_true")
 
 
 if __name__ == "__main__":
@@ -42,7 +44,13 @@ if __name__ == "__main__":
         input_s = input_f.read()
         input_f.close()
         input_data = json.loads(input_s)
-    nlp = spacy.load('ja_ginza')
+    if args.electra == True:
+        nlp = spacy.load("ja_ginza_electra")
+    elif args.normal == True:
+        nlp = spacy.load("ja_ginza")
+    else:
+        # default
+        nlp = spacy.load("ja_ginza_electra")
     output_s = "{"
     is_head = True
     for k,v in input_data.items():

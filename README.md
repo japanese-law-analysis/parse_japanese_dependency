@@ -20,6 +20,7 @@ python parse_japanese_dependency.py --input input.json --output output.json
 - spacy
 - ginza
 - ja_ginza
+- ja_ginza_electra
 
 です。
 
